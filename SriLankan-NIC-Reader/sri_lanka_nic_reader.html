@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ශ්‍රී ලංකා ජාතික හැඳුනුම්පත් විශ්ලේෂකය</title>
+    <title>ශ්‍රී ලංකා ජාතික හැඳුනුම්පත් විශ්ලේෂණය</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;600;700&display=swap');
 
@@ -394,16 +394,16 @@
 
 <body>
     <div class="container">
-        <h1><span id="title">ශ්‍රී ලංකා ජාතික හැඳුනුම්පත් විශ්ලේෂකය</span></h1>
+        <h1><span id="title">ශ්‍රී ලංකා ජාතික හැඳුනුම්පත් විශ්ලේෂණය</span></h1>
 
         <div class="format-info">
             <h3 id="format-title">📋 හැඳුනුම්පත් ආකෘති:</h3>
-            <p id="format-new"><strong>නව ආකෘතිය:</strong> 200112345678 (වර්ෂය 4 ඉලක්කම් + දින ගණන 3 ඉලක්කම් + පුද්ගල
-                හැඳුනුම් අංකය 5 ඉලක්කම්)</p>
-            <p id="format-old"><strong>පරණ ආකෘතිය:</strong> 011234567V/X (වර්ෂය 2 ඉලක්කම් + දින ගණන 3 ඉලක්කම් + පුද්ගල
-                හැඳුනුම් අංකය 4 ඉලක්කම් + V/X)</p>
-            <p id="format-gender"><strong>ස්ත්‍රී පුරුෂ භාවය:</strong> කාන්තාවන් සඳහා උපන් දිනයට 500ක් එකතු කර ඇත</p>
-            <span class="tooltip">හැඳුනුම්පත් අංකයේ ආකෘතිය ගැන වැඩිදුර තොරතුරු</span>
+            <p id="format-new"><strong>නව ආකෘතිය:</strong> 200112345678 (වසර 4 ඉලක්කම් + උපන් දින ගණන 3 ඉලක්කම් + පුද්ගල
+                අංකය 5 ඉලක්කම්)</p>
+            <p id="format-old"><strong>පැරණි ආකෘතිය:</strong> 011234567V/X (වසර 2 ඉලක්කම් + උපන් දින ගණන 3 ඉලක්කම් +
+                පුද්ගල අංකය 4 ඉලක්කම් + V/X)</p>
+            <p id="format-gender"><strong>ස්ත්‍රී/පුරුෂ භේදය:</strong> කාන්තාවන්ගේ උපන් දින ගණනට 500 එකතු කර ඇත</p>
+            <span class="tooltip">හැඳුනුම්පතේ ආකෘතිය පිළිබඳ වැඩිදුර තොරතුරු</span>
         </div>
 
         <div class="input-section">
@@ -422,9 +422,9 @@
         <div id="result"></div>
 
         <div class="history-section" id="history" style="display: none;">
-            <h3 id="history-title">📜 ඉතිහාසය</h3>
+            <h3 id="history-title">📜 පෙර විශ්ලේෂණ</h3>
             <div id="history-list"></div>
-            <button class="btn clear-history" onclick="clearHistory()" id="clear-history-btn">ඉතිහාසය ඉවත්
+            <button class="btn clear-history" onclick="clearHistory()" id="clear-history-btn">පෙර විශ්ලේෂණ ඉවත්
                 කරන්න</button>
         </div>
     </div>
@@ -432,34 +432,35 @@
     <script>
         const translations = {
             si: {
-                title: 'ශ්‍රී ලංකා ජාතික හැඳුනුම්පත් විශ්ලේෂකය',
+                title: 'ශ්‍රී ලංකා ජාතික හැඳුනුම්පත් විශ්ලේෂණය',
                 formatTitle: '📋 හැඳුනුම්පත් ආකෘති:',
-                formatNew: '<strong>නව ආකෘතිය:</strong> 200112345678 (වර්ෂය 4 ඉලක්කම් + දින ගණන 3 ඉලක්කම් + පුද්ගල හැඳුනුම් අංකය 5 ඉලක්කම්)',
-                formatOld: '<strong>පරණ ආකෘතිය:</strong> 011234567V/X (වර්ෂය 2 ඉලක්කම් + දින ගණන 3 ඉලක්කම් + පුද්ගල හැඳුනුම් අංකය 4 ඉලක්කම් + V/X)',
-                formatGender: '<strong>ස්ත්‍රී පුරුෂ භාවය:</strong> කාන්තාවන් සඳහා උපන් දිනයට 500ක් එකතු කර ඇත',
+                formatNew: '<strong>නව ආකෘතිය:</strong> 200112345678 (වසර 4 ඉලක්කම් + උපන් දින ගණන 3 ඉලක්කම් + පුද්ගල අංකය 5 ඉලක්කම්)',
+                formatOld: '<strong>පැරණි ආකෘතිය:</strong> 011234567V/X (වසර 2 ඉලක්කම් + උපන් දින ගණන 3 ඉලක්කම් + පුද්ගල අංකය 4 ඉලක්කම් + V/X)',
+                formatGender: '<strong>ස්ත්‍රී/පුරුෂ භේදය:</strong> කාන්තාවන්ගේ උපන් දින ගණනට 500 එකතු කර ඇත',
                 inputLabel: 'ජාතික හැඳුනුම්පත් අංකය:',
                 analyzeBtn: 'විශ්ලේෂණය කරන්න',
-                historyTitle: '📜 ඉතිහාසය',
-                clearHistoryBtn: 'ඉතිහාසය ඉවත් කරන්න',
+                historyTitle: '📜 පෙර විශ්ලේෂණ',
+                clearHistoryBtn: 'පෙර විශ්ලේෂණ ඉවත් කරන්න',
                 placeholder: 'උදා: 200112345678 හෝ 011234567V',
-                errorEmpty: 'කරුණාකර හැඳුනුම්පත් අංকයක් ඇතුල් කරන්න',
-                errorInvalid: 'වලංගු නොවන හැඳුනුම්පත් ආකෘතිය',
-                errorYear: 'වලංගු නොවන වර්ෂය',
-                errorDay: 'වලංගු නොවන දින අංකය',
+                errorEmpty: 'කරුණාකර හැඳුනුම්පත් අංකය ඇතුලත් කරන්න',
+                errorInvalid: 'වලංගු නොවන හැඳුනුම්පත් ආකෘතියක්',
+                errorYear: 'වලංගු නොවන වසරක්',
+                errorDay: 'වලංගු නොවන උපන් දින ගණනක්',
                 resultFormat: '📊 ආකෘතිය:',
-                resultYear: '📅 උපන් වර්ෂය:',
+                resultYear: '📅 උපන් වසර:',
                 resultBirthDate: '🗓️ උපන් දිනය:',
-                resultGender: '⚤ ස්ත්‍රී පුරුෂ භාවය:',
-                resultPersonal: '🔢 පුද්ගල හැඳුනුම් අංකය:',
-                resultSuffix: '🔤 අවසන් අකුර:',
+                resultGender: '⚤ ස්ත්‍රී/පුරුෂ භේදය:',
+                resultPersonal: '🔢 පුද්ගල අංකය:',
+                resultSuffix: '🔤 අවසාන අකුර:',
                 resultNewFormat: '🔄 නව ආකෘතියට පරිවර්තනය:',
-                male: 'පුරුෂයා',
-                female: 'කාන්තාව',
+                male: 'පිරිමි',
+                female: 'කාන්තා',
                 newFormat: 'නව ආකෘතිය',
-                oldFormat: 'පරණ ආකෘතිය',
+                oldFormat: 'පැරණි ආකෘතිය',
                 copySuccess: 'පිටපත් කිරීම සාර්ථකයි!',
                 copyBtn: 'පිටපත් කරන්න',
-                exportBtn: 'බාගත කරන්න'
+                exportBtn: 'බාගන්න',
+                tooltip: 'හැඳුනුම්පතේ ආකෘතිය පිළිබඳ වැඩිදුර තොරතුරු'
             },
             en: {
                 title: 'Sri Lanka National ID Analyzer',
@@ -489,7 +490,8 @@
                 oldFormat: 'Old Format',
                 copySuccess: 'Copied successfully!',
                 copyBtn: 'Copy',
-                exportBtn: 'Download'
+                exportBtn: 'Download',
+                tooltip: 'More information about the ID format'
             }
         };
 
@@ -514,6 +516,7 @@
             document.getElementById('history-title').textContent = t.historyTitle;
             document.getElementById('clear-history-btn').textContent = t.clearHistoryBtn;
             document.getElementById('nicNumber').placeholder = t.placeholder;
+            document.querySelector('.tooltip').textContent = t.tooltip;
         }
 
         function analyzeNIC() {
@@ -670,7 +673,7 @@
                     </div>
                     <div class="result-item">
                         <div class="result-label">${t.resultBirthDate}</div>
-                        <div class="result-value">${result.birthDate} (${currentLang === 'si' ? 'වර්ෂයේ' : 'Day of year'} ${result.dayNumber})</div>
+                        <div class="result-value">${result.birthDate} (${currentLang === 'si' ? 'වසරේ' : 'Day of year'} ${result.dayNumber})</div>
                     </div>
                     <div class="result-item">
                         <div class="result-label">${t.resultGender}</div>
