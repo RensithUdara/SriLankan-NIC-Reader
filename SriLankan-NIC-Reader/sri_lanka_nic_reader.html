@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="si">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -145,7 +146,9 @@
             gap: 1rem;
         }
 
-        .lang-toggle, .copy-btn, .export-btn {
+        .lang-toggle,
+        .copy-btn,
+        .export-btn {
             background: linear-gradient(145deg, #2e5b4e, #1a3c34);
             flex: 1;
         }
@@ -306,19 +309,43 @@
         }
 
         @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-10px); }
-            40%, 80% { transform: translateX(10px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20%,
+            60% {
+                transform: translateX(-10px);
+            }
+
+            40%,
+            80% {
+                transform: translateX(10px);
+            }
         }
 
         @media (max-width: 768px) {
@@ -364,14 +391,17 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>🇱🇰 <span id="title">ශ්‍රී ලංකා ජාතික හැඳුනුම්පත් විශ්ලේෂකය</span></h1>
-        
+        <h1><span id="title">ශ්‍රී ලංකා ජාතික හැඳුනුම්පත් විශ්ලේෂකය</span></h1>
+
         <div class="format-info">
             <h3 id="format-title">📋 හැඳුනුම්පත් ආකෘති:</h3>
-            <p id="format-new"><strong>නව ආකෘතිය:</strong> 200112345678 (වර්ෂය 4 ඉලක්කම් + දින ගණන 3 ඉලක්කම් + පුද්ගල හැඳුනුම් අංකය 5 ඉලක්කම්)</p>
-            <p id="format-old"><strong>පරණ ආකෘතිය:</strong> 011234567V/X (වර්ෂය 2 ඉලක්කම් + දින ගණන 3 ඉලක්කම් + පුද්ගල හැඳුනුම් අංකය 4 ඉලක්කම් + V/X)</p>
+            <p id="format-new"><strong>නව ආකෘතිය:</strong> 200112345678 (වර්ෂය 4 ඉලක්කම් + දින ගණන 3 ඉලක්කම් + පුද්ගල
+                හැඳුනුම් අංකය 5 ඉලක්කම්)</p>
+            <p id="format-old"><strong>පරණ ආකෘතිය:</strong> 011234567V/X (වර්ෂය 2 ඉලක්කම් + දින ගණන 3 ඉලක්කම් + පුද්ගල
+                හැඳුනුම් අංකය 4 ඉලක්කම් + V/X)</p>
             <p id="format-gender"><strong>ස්ත්‍රී පුරුෂ භාවය:</strong> කාන්තාවන් සඳහා උපන් දිනයට 500ක් එකතු කර ඇත</p>
             <span class="tooltip">හැඳුනුම්පත් අංකයේ ආකෘතිය ගැන වැඩිදුර තොරතුරු</span>
         </div>
@@ -394,7 +424,8 @@
         <div class="history-section" id="history" style="display: none;">
             <h3 id="history-title">📜 ඉතිහාසය</h3>
             <div id="history-list"></div>
-            <button class="btn clear-history" onclick="clearHistory()" id="clear-history-btn">ඉතිහාසය ඉවත් කරන්න</button>
+            <button class="btn clear-history" onclick="clearHistory()" id="clear-history-btn">ඉතිහාසය ඉවත්
+                කරන්න</button>
         </div>
     </div>
 
@@ -514,7 +545,7 @@
                     } else {
                         throw new Error(t.errorInvalid);
                     }
-                    
+
                     saveToHistory(nicNumber, result);
                     displayResult(result);
                 } catch (error) {
@@ -529,11 +560,11 @@
             const year = parseInt(nic.substring(0, 4));
             const dayNumber = parseInt(nic.substring(4, 7));
             const personalNumber = nic.substring(7, 12);
-            
+
             if (year < 1900 || year > new Date().getFullYear()) {
                 throw new Error(t.errorYear);
             }
-            
+
             let gender, actualDayNumber;
             if (dayNumber > 500) {
                 gender = t.female;
@@ -542,13 +573,13 @@
                 gender = t.male;
                 actualDayNumber = dayNumber;
             }
-            
+
             if (actualDayNumber < 1 || actualDayNumber > 366) {
                 throw new Error(t.errorDay);
             }
-            
+
             const birthDate = calculateBirthDate(year, actualDayNumber);
-            
+
             return {
                 format: t.newFormat,
                 year: year,
@@ -566,7 +597,7 @@
             const dayNumber = parseInt(nic.substring(2, 5));
             const personalNumber = nic.substring(5, 9);
             const suffix = nic.substring(9);
-            
+
             let gender, actualDayNumber, year;
             if (dayNumber > 500) {
                 gender = t.female;
@@ -577,14 +608,14 @@
                 actualDayNumber = dayNumber;
                 year = 1900 + parseInt(yearPart);
             }
-            
+
             if (actualDayNumber < 1 || actualDayNumber > 366) {
                 throw new Error(t.errorDay);
             }
-            
+
             const birthDate = calculateBirthDate(year, actualDayNumber);
             const newFormat = year.toString() + (dayNumber > 500 ? dayNumber : dayNumber).toString().padStart(3, '0') + '0' + personalNumber;
-            
+
             return {
                 format: t.oldFormat,
                 year: year,
@@ -610,10 +641,10 @@
             } else {
                 adjustedDays = days - 1;
             }
-            
+
             const startDate = new Date(year, 0, 1);
             const targetDate = new Date(startDate.getTime() + (adjustedDays * 24 * 60 * 60 * 1000));
-            
+
             return targetDate.toLocaleDateString(currentLang === 'si' ? 'si-LK' : 'en-US', {
                 year: 'numeric',
                 month: 'long',
@@ -626,7 +657,7 @@
             const t = translations[currentLang];
             const genderClass = result.gender === t.male ? 'male' : 'female';
             const genderIcon = result.gender === t.male ? '👨' : '👩';
-            
+
             let html = `
                 <div class="result-section">
                     <div class="result-item">
@@ -652,7 +683,7 @@
                         <div class="result-value">${result.personalNumber}</div>
                     </div>
             `;
-            
+
             if (result.suffix) {
                 html += `
                     <div class="result-item">
@@ -661,7 +692,7 @@
                     </div>
                 `;
             }
-            
+
             if (result.newFormat) {
                 html += `
                     <div class="result-item">
@@ -670,14 +701,14 @@
                     </div>
                 `;
             }
-            
+
             html += `
                 <div class="btn-group">
                     <button class="btn copy-btn" onclick="copyResult(this)" data-result="${encodeURIComponent(JSON.stringify(result))}">${t.copyBtn}</button>
                     <button class="btn export-btn" onclick="exportResult(this)" data-result="${encodeURIComponent(JSON.stringify(result))}">${t.exportBtn}</button>
                 </div>
             </div>`;
-            
+
             document.getElementById('result').innerHTML = html;
         }
 
@@ -756,7 +787,7 @@
         }
 
         // Real-time input validation
-        document.getElementById('nicNumber').addEventListener('input', function(e) {
+        document.getElementById('nicNumber').addEventListener('input', function (e) {
             const value = e.target.value.trim().toUpperCase();
             const clearBtn = document.querySelector('.clear-btn');
             clearBtn.style.display = value ? 'block' : 'none';
@@ -776,7 +807,7 @@
         });
 
         // Enter key support
-        document.getElementById('nicNumber').addEventListener('keypress', function(e) {
+        document.getElementById('nicNumber').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 analyzeNIC();
             }
@@ -787,4 +818,5 @@
         displayHistory();
     </script>
 </body>
+
 </html>
