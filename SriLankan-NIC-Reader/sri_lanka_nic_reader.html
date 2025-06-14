@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🇱🇰 ශ්‍රී ලංකා ජාතික හැඳුනුම්පත් විශ්ලේෂකය</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans Sinhala', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #1a3c34 0%, #2e5b4e 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #1a2525;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #d4a017;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .input-section {
+            background: linear-gradient(145deg, #f5f6f5, #e8ece8);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .input-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1a3c34;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid #d4e4d4;
+            border-radius: 0.8rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: #ffffff;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #d4a017;
+            box-shadow: 0 0 0 4px rgba(212, 160, 23, 0.2);
+        }
+
+        .btn {
+            background: linear-gradient(145deg, #d4a017, #b38712);
+            color: white;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 160, 23, 0.3);
+            background: linear-gradient(145deg, #e8b923, #c49815);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(212, 160, 23, 0.2);
+        }
+
+        .result-section {
+            background: linear-gradient(145deg, #ffffff, #f5f6f5);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #d4a017;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .result-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(212, 160, 23, 0.05);
+            border-radius: 0.8rem;
+            border-left: 4px solid #d4a017;
+            transition: transform 0.2s ease;
+        }
+
+        .result-item:hover {
+            transform: translateX(5px);
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: #1a3c34;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .result-value {
+            font-size: 1.15rem;
+            color: #2e5b4e;
+            line-height: 1.5;
+        }
+
+        .error {
+            background: linear-gradient(145deg, #e63946, #d00000);
+            color: white;
+            padding: 1.2rem;
+            border-radius: 0.8rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+            animation: shake 0.4s ease-in-out;
+        }
+
+        .format-info {
+            background: linear-gradient(145deg, #e8f4ea, #d4e4d4);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            border-left: 6px solid #2e5b4e;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .format-info h3 {
+            color: #1a3c34;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        .format-info p {
+            color: #2e5b4e;
+            line-height: 1.7;
+            margin-bottom: 0.6rem;
+            font-size: 1.05rem;
+        }
+
+        .gender-indicator {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .gender-indicator:hover {
+            transform: scale(1.05);
+        }
+
+        .male {
+            background: linear-gradient(145deg, #2e5b4e, #1a3c34);
+            color: white;
+        }
+
+        .female {
+            background: linear-gradient(145deg, #e63946, #d00000);
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .input-section {
+                padding: 1.5rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .input-section {
+                padding: 1rem;
+            }
+
+            .result-section {
+                padding: 1rem;
+            }
+
+            .result-item {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🇱🇰 ශ්‍රී ලංකා ජාතික හැඳුනුම්පත් විශ්ලේෂකය</h1>
+        
+        <div class="format-info">
+            <h3>📋 හැඳුනුම්පත් ආකෘති:</h3>
+            <p><strong>නව ආකෘතිය:</strong> 200112345678 (වර්ෂය 4 ඉලක්කම් + දින ගණන 3 ඉලක්කම් + පුද්ගල හැඳුනුම් අංකය 5 ඉලක්කම්)</p>
+            <p><strong>පරණ ආකෘතිය:</strong> 011234567V/X (වර්ෂය 2 ඉලක්කම් + දින ගණන 3 ඉලක්කම් + පුද්ගල හැඳුනුම් අංකය 4 ඉලක්කම් + V/X)</p>
+            <p><strong>ස්ත්‍රී පුරුෂ භාවය:</strong> කාන්තාවන් සඳහා උපන් දිනයට 500ක් එකතු කර ඇත</p>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label for="nicNumber">ජාතික හැඳුනුම්පත් අංකය:</label>
+                <input type="text" id="nicNumber" placeholder="උදා: 200112345678 හෝ 011234567V" maxlength="12">
+            </div>
+            <button class="btn" onclick="analyzeNIC()">විශ්ලේෂණය කරන්න</button>
+        </div>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function analyzeNIC() {
+            const nicNumber = document.getElementById('nicNumber').value.trim().toUpperCase();
+            const resultDiv = document.getElementById('result');
+            
+            if (!nicNumber) {
+                resultDiv.innerHTML = '<div class="error">කරුණාකර හැඳුනුම්පත් අංකයක් ඇතුල් කරන්න</div>';
+                return;
+            }
+
+            try {
+                let result;
+                
+                // Check if it's new format (12 digits) or old format (9 digits + V/X)
+                if (/^\d{12}$/.test(nicNumber)) {
+                    result = analyzeNewFormat(nicNumber);
+                } else if (/^\d{9}[VX]$/.test(nicNumber)) {
+                    result = analyzeOldFormat(nicNumber);
+                } else {
+                    throw new Error('වලංගු නොවන හැඳුනුම්පත් ආක�ৃතිය');
+                }
+                
+                displayResult(result);
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ ${error.message}</div>`;
+            }
+        }
+
+        function analyzeNewFormat(nic) {
+            const year = parseInt(nic.substring(0, 4));
+            const dayNumber = parseInt(nic.substring(4, 7));
+            const personalNumber = nic.substring(7, 12);
+            
+            // Validate year
+            if (year < 1900 || year > new Date().getFullYear()) {
+                throw new Error('වලංගු නොවන වර්ෂය');
+            }
+            
+            // Determine gender and actual day number
+            let gender, actualDayNumber;
+            if (dayNumber > 500) {
+                gender = 'කාන්තාව';
+                actualDayNumber = dayNumber - 500;
+            } else {
+                gender = 'පුරුෂයා';
+                actualDayNumber = dayNumber;
+            }
+            
+            // Validate day number
+            if (actualDayNumber < 1 || actualDayNumber > 366) {
+                throw new Error('වලංගු නොවන දින අංකය');
+            }
+            
+            // Calculate birth date using JavaScript logic
+            const birthDate = calculateBirthDate(year, actualDayNumber);
+            
+            return {
+                format: 'නව ආකෘතිය',
+                year: year,
+                dayNumber: actualDayNumber,
+                gender: gender,
+                birthDate: birthDate,
+                personalNumber: personalNumber,
+                originalInput: nic
+            };
+        }
+
+        function analyzeOldFormat(nic) {
+            const yearPart = nic.substring(0, 2);
+            const dayNumber = parseInt(nic.substring(2, 5));
+            const personalNumber = nic.substring(5, 9);
+            const suffix = nic.substring(9);
+            
+            // Determine gender and actual day number first
+            let gender, actualDayNumber, year;
+            if (dayNumber > 500) {
+                gender = 'කාන්තාව';
+                actualDayNumber = dayNumber - 500;
+                year = 1900 + parseInt(yearPart); // Female: always 1900+
+            } else {
+                gender = 'පුරුෂයා';
+                actualDayNumber = dayNumber;
+                year = 1900 + parseInt(yearPart); // Male: always 1900+
+            }
+            
+            // Validate day number
+            if (actualDayNumber < 1 || actualDayNumber > 366) {
+                throw new Error('වලංගු නොවන දින අංකය');
+            }
+            
+            // Calculate birth date using JavaScript logic
+            const birthDate = calculateBirthDate(year, actualDayNumber);
+            
+            // Convert to new format
+            const newFormat = year.toString() + (dayNumber > 500 ? dayNumber : dayNumber).toString().padStart(3, '0') + '0' + personalNumber;
+            
+            return {
+                format: 'පරණ ආකෘතිය',
+                year: year,
+                dayNumber: actualDayNumber,
+                gender: gender,
+                birthDate: birthDate,
+                personalNumber: personalNumber,
+                suffix: suffix,
+                originalInput: nic,
+                newFormat: newFormat
+            };
+        }
+
+        function calculateBirthDate(year, days) {
+            // JavaScript logic for date calculation
+            const isNotLeapYear = !(year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
+            
+            let adjustedDays;
+            if (isNotLeapYear) {
+                if (days >= 60) {
+                    adjustedDays = days - 2; // Skip Feb 29
+                } else {
+                    adjustedDays = days - 1;
+                }
+            } else {
+                adjustedDays = days - 1; // Normal leap year calculation
+            }
+            
+            // Create date starting from January 1st and add adjusted days
+            const startDate = new Date(year, 0, 1); // January 1st
+            const targetDate = new Date(startDate.getTime() + (adjustedDays * 24 * 60 * 60 * 1000));
+            
+            return targetDate.toLocaleDateString('si-LK', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long'
+            });
+        }
+
+        function displayResult(result) {
+            const genderClass = result.gender === 'පුරුෂයා' ? 'male' : 'female';
+            const genderIcon = result.gender === 'පුරුෂයා' ? '👨' : '👩';
+            
+            let html = `
+                <div class="result-section">
+                    <div class="result-item">
+                        <div class="result-label">📊 ආකෘතිය:</div>
+                        <div class="result-value">${result.format}</div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <div class="result-label">📅 උපන් වර්ෂය:</div>
+                        <div class="result-value">${result.year}</div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <div class="result-label">🗓️ උපන් දිනය:</div>
+                        <div class="result-value">${result.birthDate} (වර්ෂයේ ${result.dayNumber} වැනි දිනය)</div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <div class="result-label">⚤ ස්ත්‍රී පුරුෂ භාවය:</div>
+                        <div class="result-value">
+                            ${genderIcon} <span class="gender-indicator ${genderClass}">${result.gender}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="result-item">
+                        <div class="result-label">🔢 පුද්ගල හැඳුනුම් අංකය:</div>
+                        <div class="result-value">${result.personalNumber}</div>
+                    </div>
+            `;
+            
+            if (result.suffix) {
+                html += `
+                    <div class="result-item">
+                        <div class="result-label">🔤 අවසන් අකුර:</div>
+                        <div class="result-value">${result.suffix}</div>
+                    </div>
+                `;
+            }
+            
+            if (result.newFormat) {
+                html += `
+                    <div class="result-item">
+                        <div class="result-label">🔄 නව ආකෘතියට පරිවර්තනය:</div>
+                        <div class="result-value">${result.newFormat}</div>
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            
+            document.getElementById('result').innerHTML = html;
+        }
+
+        // Add enter key support
+        document.getElementById('nicNumber').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                analyzeNIC();
+            }
+        });
+    </script>
+</body>
+</html>
